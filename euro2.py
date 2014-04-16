@@ -27,7 +27,7 @@ import thinkbayes
 
 class Euro(thinkbayes.Suite):
 
-    def Likelihood(self, hypo, data):
+    def Likelihood(self, data, hypo):
         """Computes the likelihood of the data under the hypothesis.
 
         hypo: integer value of x, the probability of heads (0-100)
