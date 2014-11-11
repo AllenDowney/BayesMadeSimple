@@ -52,7 +52,7 @@ def AverageLikelihood(suite, data):
     total = 0
 
     for hypo, prob in suite.Items():
-        like = suite.Likelihood(hypo, data)
+        like = suite.Likelihood(data, hypo)
         total += prob * like
 
     return total
