@@ -5,6 +5,12 @@ Copyright 2013 Allen B. Downey
 License: GNU GPLv3 http://www.gnu.org/licenses/gpl.html
 """
 
+from __future__ import print_function, division
+
+import thinkbayes
+import thinkplot
+
+
 """This file contains a partial solution to a problem from
 MacKay, "Information Theory, Inference, and Learning Algorithms."
 
@@ -22,17 +28,13 @@ rather than fair?"
 
 """
 
-import thinkbayes
-import thinkplot
-
-
 class Euro(thinkbayes.Suite):
 
-    def Likelihood(self, hypo, data):
+    def Likelihood(self, data, hypo):
         """Computes the likelihood of the data under the hypothesis.
 
-        hypo: integer value of x, the probability of heads (0-100)
         data: tuple (#heads, #tails)
+        hypo: integer value of x, the probability of heads (0-100)
         """
         x = hypo / 100.0
         heads, tails = data
@@ -53,7 +55,7 @@ def AverageLikelihood(suite, data):
     total = 0
 
     for hypo, prob in suite.Items():
-        like = suite.Likelihood(hypo, data)
+        like = suite.Likelihood(data, hypo)
         total += prob * like
 
     return total
@@ -70,20 +72,20 @@ def main():
         bias.Set(x, 100-x)
     bias.Normalize()
 
-    thinkplot.Pmf(bias)
+    thinkplot.Pdf(bias)
     thinkplot.Show()
 
     # notice that we've changed the representation of the data
     data = 140, 110
 
     like_bias = AverageLikelihood(bias, data)
-    print 'like_bias', like_bias
+    print('like_bias', like_bias)
 
     like_fair = AverageLikelihood(fair, data)
-    print 'like_fair', like_fair
+    print('like_fair', like_fair)
 
     ratio = like_bias / like_fair
-    print 'Bayes factor', ratio
+    print('Bayes factor', ratio)
 
     
 if __name__ == '__main__':

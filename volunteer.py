@@ -5,6 +5,8 @@ Copyright 2013 Allen B. Downey
 License: GNU GPLv3 http://www.gnu.org/licenses/gpl.html
 """
 
+from __future__ import print_function, division
+
 import thinkbayes
 import thinkplot
 
@@ -133,7 +135,12 @@ def main():
     thinkplot.Pmf(q_marginal, label='q')
     thinkplot.Pmf(r_marginal, label='r')
     #thinkplot.Pmf(p_marginal)
-    thinkplot.Show()
+
+    thinkplot.Save(root='volunteer1',
+                   xlabel='fraction participating/reporting',
+                   ylabel='PMF',
+                   formats=['png']
+                   )
 
     
 if __name__ == '__main__':

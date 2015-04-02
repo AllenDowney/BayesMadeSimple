@@ -5,6 +5,8 @@ Copyright 2012 Allen B. Downey
 License: GNU GPLv3 http://www.gnu.org/licenses/gpl.html
 """
 
+from __future__ import print_function, division
+
 import csv
 
 import thinkbayes
@@ -168,23 +170,25 @@ def PmfProbGreater(pmf1, pmf2):
 
 
 def main():
-
     exam = Exam()
 
     alice = Sat(exam)
-    alice.name = 'alice'
+    alice.label = 'alice'
     alice.Update(780)
 
     bob = Sat(exam)
-    bob.name = 'bob'
+    bob.label = 'bob'
     bob.Update(760)
 
-    print 'Prob Alice is "smarter":', PmfProbGreater(alice, bob)
-    print 'Prob Bob is "smarter":', PmfProbGreater(bob, alice)
+    print('Prob Alice is "smarter":', PmfProbGreater(alice, bob))
+    print('Prob Bob is "smarter":', PmfProbGreater(bob, alice))
 
-    thinkplot.Pmfs([alice, bob])
+    thinkplot.PrePlot(2)
+    thinkplot.Pdfs([alice, bob])
     thinkplot.Show(xlabel='x',
-                   ylabel='Probability')
+                   ylabel='Probability',
+                   loc='upper left',
+                   xlim=[0.7, 1.02])
 
 
 if __name__ == '__main__':

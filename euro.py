@@ -5,6 +5,12 @@ Copyright 2013 Allen B. Downey
 License: GNU GPLv3 http://www.gnu.org/licenses/gpl.html
 """
 
+from __future__ import print_function, division
+
+import thinkbayes
+import thinkplot
+
+
 """This file contains a partial solution to a problem from
 MacKay, "Information Theory, Inference, and Learning Algorithms."
 
@@ -21,10 +27,6 @@ MacKay asks, "But do these data give evidence that the coin is biased
 rather than fair?"
 
 """
-
-import thinkbayes
-import thinkplot
-
 
 class Euro(thinkbayes.Suite):
 
@@ -43,9 +45,10 @@ def main():
     
     suite.Update('H')
 
-    thinkplot.Pmf(suite)
+    thinkplot.Pdf(suite)
     thinkplot.Show(xlabel='x',
-                ylabel='Probability')
+                   ylabel='Probability',
+                   legend=False)
     
 
 if __name__ == '__main__':

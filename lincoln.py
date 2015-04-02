@@ -5,6 +5,8 @@ Copyright 2014 Allen B. Downey
 License: GNU GPLv3 http://www.gnu.org/licenses/gpl.html
 """
 
+from __future__ import print_function, division
+
 import thinkbayes
 import thinkplot
 
@@ -24,13 +26,13 @@ want to estimate how many bugs are really in the program. You know
 there are at least 20 bugs, and if you have supreme confidence in your
 tester, you may suppose there are around 20 bugs. But maybe your
 tester isn't very good. Maybe there are hundreds of bugs. How can you
-have any idea how many bugs there are? There’s no way to know with one
+have any idea how many bugs there are? There's no way to know with one
 tester. But if you have two testers, you can get a good idea, even if
-you don’t know how skilled the testers are."
+you don't know how skilled the testers are."
 
-Then he presents the Lincoln index, an estimator "described by
+Then he presents the Lincoln index, an estimator "described by
 Frederick Charles Lincoln in 1930," where Wikpedia's use of
-"described" is a hint that the index is another example of Stigler's
+"described" is a hint that the index is another example of Stigler's
 law of eponymy.
 
     "Suppose two testers independently search for bugs. Let k1 be the
@@ -98,9 +100,7 @@ class Lincoln(thinkbayes.Suite, thinkbayes.Joint):
         return part1 * part2
 
 
-
 def main():
-
     data = 20, 15, 3
     probs = numpy.linspace(0, 1, 101)
     hypos = []
@@ -120,8 +120,8 @@ def main():
                    ylabel='PMF',
                    formats=['pdf', 'png'])
 
-    print n_marginal.Mean()
-    print n_marginal.MaximumLikelihood()
+    print(n_marginal.Mean())
+    print(n_marginal.MaximumLikelihood())
 
     
 if __name__ == '__main__':

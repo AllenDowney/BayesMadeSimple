@@ -5,6 +5,8 @@ Copyright 2012 Allen B. Downey
 License: GNU GPLv3 http://www.gnu.org/licenses/gpl.html
 """
 
+from __future__ import print_function, division
+
 import thinkbayes
 import thinkplot
 
@@ -35,7 +37,8 @@ def main():
     thinkplot.PrePlot(1)
     thinkplot.Pmf(suite)
     thinkplot.Show(xlabel='Number of trains',
-                   ylabel='Probability')
+                   ylabel='Probability',
+                   legend=False)
 
 
 if __name__ == '__main__':

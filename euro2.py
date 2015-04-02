@@ -5,6 +5,11 @@ Copyright 2013 Allen B. Downey
 License: GNU GPLv3 http://www.gnu.org/licenses/gpl.html
 """
 
+from __future__ import print_function, division
+
+import thinkbayes
+
+
 """This file contains a partial solution to a problem from
 MacKay, "Information Theory, Inference, and Learning Algorithms."
 
@@ -22,16 +27,14 @@ rather than fair?"
 
 """
 
-import thinkbayes
-
 
 class Euro(thinkbayes.Suite):
 
     def Likelihood(self, data, hypo):
         """Computes the likelihood of the data under the hypothesis.
 
-        hypo: integer value of x, the probability of heads (0-100)
         data: tuple (#heads, #tails)
+        hypo: integer value of x, the probability of heads (0-100)
         """
         x = hypo / 100.0
         heads, tails = data
@@ -72,13 +75,13 @@ def main():
     data = 140, 110
 
     like_bias = AverageLikelihood(bias, data)
-    print 'like_bias', like_bias
+    print('like_bias', like_bias)
 
     like_fair = AverageLikelihood(fair, data)
-    print 'like_fair', like_fair
+    print('like_fair', like_fair)
 
     ratio = like_bias / like_fair
-    print 'Bayes factor', ratio
+    print('Bayes factor', ratio)
 
     
 if __name__ == '__main__':

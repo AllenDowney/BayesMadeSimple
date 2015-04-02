@@ -5,6 +5,8 @@ Copyright 2013 Allen B. Downey
 License: GNU GPLv3 http://www.gnu.org/licenses/gpl.html
 """
 
+from __future__ import print_function, division
+
 import math
 import numpy
 
@@ -20,7 +22,7 @@ def RenderPdf(mu, sigma, n=101):
     n: number of places to evaluate the PDF
     """
     xs = numpy.linspace(mu-4*sigma, mu+4*sigma, n)
-    ys = [thinkbayes.EvalGaussianPdf(x, mu, sigma) for x in xs]
+    ys = [thinkbayes.EvalNormalPdf(x, mu, sigma) for x in xs]
     return xs, ys
 
 

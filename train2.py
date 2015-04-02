@@ -31,19 +31,33 @@ class Train(thinkbayes.Suite):
 
 
 def main():
-    hypos = xrange(100, 1001)
+    hypos = xrange(1, 101)
     suite = Train(hypos)
 
-    suite.Update(321)
+    suite.Update(25)
     print('Posterior mean', suite.Mean())
     print('Posterior MLE', suite.MaximumLikelihood())
     print('Posterior CI 90', suite.CredibleInterval(90))
 
     thinkplot.PrePlot(1)
-    thinkplot.Pmf(suite)
-    thinkplot.Show(xlabel='Number of trains',
+    thinkplot.Pmf(suite, linewidth=5)
+    thinkplot.Save(root='train2',
+                   xlabel='Number of trains',
                    ylabel='Probability',
-                   legend=False)
+                   formats=['png'])
+
+    thinkplot.Pmf(suite, linewidth=5, color='0.8')
+    suite.Update(42)
+    print('Posterior mean', suite.Mean())
+    print('Posterior MLE', suite.MaximumLikelihood())
+    print('Posterior CI 90', suite.CredibleInterval(90))
+
+    thinkplot.PrePlot(1)
+    thinkplot.Pmf(suite, linewidth=5)
+    thinkplot.Save(root='train3',
+                   xlabel='Number of trains',
+                   ylabel='Probability',
+                   formats=['png'])
 
 
 if __name__ == '__main__':
