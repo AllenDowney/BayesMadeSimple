@@ -31,7 +31,7 @@ class Train(thinkbayes.Suite):
 
 
 def main():
-    hypos = xrange(100, 1001)
+    hypos = range(100, 1001)
     suite = Train(hypos)
 
     suite.Update(321)
