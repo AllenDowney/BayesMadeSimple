@@ -288,8 +288,13 @@ def Bar(xs, ys, **options):
       options: keyword args passed to pyplot.bar
     """
     options = _UnderrideColor(options)
-    options = _Underride(options, linewidth=0, alpha=0.6)
-    pyplot.bar(xs, ys, **options)
+    options = _Underride(
+        options, 
+        linewidth=0, 
+        alpha=0.6, 
+        tick_label=xs)
+    x_scalars = list(range(len(xs)))
+    pyplot.bar(x_scalars, ys, **options)
 
 
 def Scatter(xs, ys=None, **options):
