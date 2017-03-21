@@ -41,6 +41,8 @@ from scipy import stats
 from scipy import special
 from scipy import ndimage
 
+from scipy.special import gamma
+
 from io import open
 
 ROOT2 = math.sqrt(2)
@@ -183,7 +185,10 @@ class _DictWrapper(object):
             return '%s(%s, %s)' % (cls, repr(self.d), repr(self.label))
 
     def __eq__(self, other):
-        return self.d == other.d
+        try:
+            return self.d == other.d
+        except AttributeError:
+            return False
 
     def __len__(self):
         return len(self.d)
@@ -294,6 +299,26 @@ class _DictWrapper(object):
         """Gets an unsorted sequence of (value, freq/prob) pairs."""
         return self.d.items()
 
+    def SortedItems(self):
+        """Gets a sorted sequence of (value, freq/prob) pairs.
+
+        It items are unsortable, the result is unsorted.
+        """
+        def isnan(x):
+            try:
+                return math.isnan(x)
+            except TypeError:
+                return False
+
+        if any([isnan(x) for x in self.Values()]):
+            msg = 'Keys contain NaN, may not sort correctly.'
+            logging.warning(msg)
+
+        try:
+            return sorted(self.d.items())
+        except TypeError:
+            return self.d.items()
+
     def Render(self, **options):
         """Generates a sequence of points suitable for plotting.
 
@@ -302,10 +327,7 @@ class _DictWrapper(object):
         Returns:
             tuple of (sorted value sequence, freq/prob sequence)
         """
-        if min(self.d.keys()) is np.nan:
-            logging.warning('Hist: contains NaN, may not render correctly.')
-
-        return zip(*sorted(self.Items()))
+        return zip(*self.SortedItems())
 
     def MakeCdf(self, label=None):
         """Makes a Cdf."""
@@ -314,7 +336,7 @@ class _DictWrapper(object):
 
     def Print(self):
         """Prints the values and freqs/probs in ascending order."""
-        for val, prob in sorted(self.d.items()):
+        for val, prob in self.SortedItems():
             print(val, prob)
 
     def Set(self, x, y=0):
@@ -478,41 +500,21 @@ class Pmf(_DictWrapper):
             t = [prob for (val, prob) in self.d.items() if val < x]
             return sum(t)
 
-    def __lt__(self, obj):
-        """Less than.
+    def ProbEqual(self, x):
+        """Probability that a sample from this Pmf is exactly x.
 
-        obj: number or _DictWrapper
-
-        returns: float probability
-        """
-        return self.ProbLess(obj)
-
-    def __gt__(self, obj):
-        """Greater than.
-
-        obj: number or _DictWrapper
+        x: number
 
         returns: float probability
         """
-        return self.ProbGreater(obj)
+        if isinstance(x, _DictWrapper):
+            return PmfProbEqual(self, x)
+        else:
+            return self[x]
 
-    def __ge__(self, obj):
-        """Greater than or equal.
-
-        obj: number or _DictWrapper
-
-        returns: float probability
-        """
-        return 1 - (self < obj)
-
-    def __le__(self, obj):
-        """Less than or equal.
-
-        obj: number or _DictWrapper
-
-        returns: float probability
-        """
-        return 1 - (self > obj)
+    # NOTE: I've decided to remove the magic comparators because they
+    # have the side-effect of making Pmf sortable, but in fact they
+    # don't support sorting.
 
     def Normalize(self, fraction=1):
         """Normalizes this PMF so the sum of all probs is fraction.
@@ -554,6 +556,14 @@ class Pmf(_DictWrapper):
         # we shouldn't get here
         raise ValueError('Random: Pmf might not be normalized.')
 
+    def Sample(self, n):
+        """Generates a random sample from this distribution.
+        
+        n: int length of the sample
+        returns: NumPy array
+        """
+        return self.MakeCdf().Sample(n)
+
     def Mean(self):
         """Computes the mean of a PMF.
 
@@ -561,6 +571,14 @@ class Pmf(_DictWrapper):
             float mean
         """
         return sum(p * x for x, p in self.Items())
+
+    def Median(self):
+        """Computes the median of a PMF.
+
+        Returns:
+            float median
+        """
+        return self.MakeCdf().Percentile(50)
 
     def Var(self, mu=None):
         """Computes the variance of a PMF.
@@ -594,7 +612,7 @@ class Pmf(_DictWrapper):
         var = self.Var(mu)
         return math.sqrt(var)
 
-    def MAP(self):
+    def Mode(self):
         """Returns the value with the highest probability.
 
         Returns: float probability
@@ -602,13 +620,12 @@ class Pmf(_DictWrapper):
         _, val = max((prob, val) for val, prob in self.Items())
         return val
 
-    # Calling this function MaximumLikelihood is potentially misleading,
-    # since the highest posterior probability does not necessarily
-    # correspond to the highest likelihood.  MAP, for maximum aposteori
-    # probability, is better, but still potentially misleading because
-    # we might apply it to a Pmf that is not a posterior distribution.
-    # So I'm providing both names.
-    MaximumLikelihood = MAP
+    # The mode of a posterior is the maximum aposteori probability (MAP)
+    MAP = Mode
+
+    # If the distribution contains likelihoods only, the peak is the
+    # maximum likelihood estimator.
+    MaximumLikelihood = Mode
 
     def CredibleInterval(self, percentage=90):
         """Computes the central credible interval.
@@ -648,7 +665,7 @@ class Pmf(_DictWrapper):
         pmf = Pmf()
         for v1, p1 in self.Items():
             for v2, p2 in other.Items():
-                pmf.Incr(v1 + v2, p1 * p2)
+                pmf[v1 + v2] += p1 * p2
         return pmf
 
     def AddConstant(self, other):
@@ -763,7 +780,8 @@ class Pmf(_DictWrapper):
         returns: new Cdf
         """
         cdf = self.MakeCdf()
-        return cdf.Max(k)
+        cdf.ps **= k
+        return cdf
 
 
 class Joint(Pmf):
@@ -941,7 +959,7 @@ def MakeMixture(metapmf, label='mix'):
     mix = Pmf(label=label)
     for pmf, p1 in metapmf.Items():
         for x, p2 in pmf.Items():
-            mix.Incr(x, p1 * p2)
+            mix[x] += p1 * p2
     return mix
 
 
@@ -1846,6 +1864,33 @@ def MakeBinomialPmf(n, p):
     return pmf
 
 
+def EvalGammaPdf(lam, a):
+    """Computes the Gamma PDF.
+
+    lam: where to evaluate the PDF
+    a: parameter of the gamma distribution
+
+    returns: float probability
+    """
+    return lam**(a-1) * math.exp(-lam) / gamma(a)
+
+
+def MakeGammaPmf(lams, a):
+    """Makes a PMF discrete approx to a Gamma distribution.
+
+    lam: parameter lambda in events per unit time
+    xs: upper bound of the Pmf
+
+    returns: normalized Pmf
+    """
+    pmf = Pmf()
+    for lam in lams:
+        pmf[lam] = EvalGammaPdf(lam, a)
+        
+    pmf.Normalize()
+    return pmf
+
+
 def EvalGeometricPmf(k, p, loc=0):
     """Evaluates the geometric PMF.
 
@@ -1941,6 +1986,40 @@ def MakeExponentialPmf(lam, high, n=200):
         pmf.Set(x, p)
     pmf.Normalize()
     return pmf
+
+
+def EvalWeibullPdf(x, lam, k):
+    """Computes the Weibull PDF.
+
+    x: value
+    lam: parameter lambda in events per unit time
+    k: parameter
+
+    returns: float probability density
+    """
+    arg = (x / lam)
+    return k / lam * arg**(k-1) * np.exp(-arg**k)
+
+
+def EvalWeibullCdf(x, lam, k):
+    """Evaluates CDF of the Weibull distribution."""
+    arg = (x / lam)
+    return 1 - np.exp(-arg**k)
+
+
+def MakeWeibullPmf(lam, k, high, n=200):
+    """Makes a PMF discrete approx to a Weibull distribution.
+
+    lam: parameter lambda in events per unit time
+    k: parameter
+    high: upper bound
+    n: number of values in the Pmf
+
+    returns: normalized Pmf
+    """
+    xs = np.linspace(0, high, n)
+    ps = EvalWeibullPdf(xs, lam, k)
+    return Pmf(dict(zip(xs, ps)))
 
 
 def EvalParetoPdf(x, xm, alpha):
@@ -2765,9 +2844,11 @@ def ReadStataDct(dct_file, **options):
     type_map = dict(byte=int, int=int, long=int, float=float, double=float)
 
     var_info = []
-    for line in open(dct_file, **options):
-        match = re.search( r'_column\(([^)]*)\)', line)
-        if match:
+    with open(dct_file, **options) as f:
+        for line in f:
+            match = re.search( r'_column\(([^)]*)\)', line)
+            if not match:
+                continue
             start = int(match.group(1))
             t = line.split()
             vtype, name, fstring = t[1:4]

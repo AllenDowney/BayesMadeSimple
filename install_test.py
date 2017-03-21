@@ -13,7 +13,7 @@ import numpy
 from matplotlib import pyplot
 
 import thinkplot
-import thinkbayes
+import thinkbayes2
 
 
 def RenderPdf(mu, sigma, n=101):
@@ -22,7 +22,7 @@ def RenderPdf(mu, sigma, n=101):
     n: number of places to evaluate the PDF
     """
     xs = numpy.linspace(mu-4*sigma, mu+4*sigma, n)
-    ys = [thinkbayes.EvalNormalPdf(x, mu, sigma) for x in xs]
+    ys = [thinkbayes2.EvalNormalPdf(x, mu, sigma) for x in xs]
     return xs, ys
 
 
