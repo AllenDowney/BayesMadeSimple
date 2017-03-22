@@ -1864,18 +1864,18 @@ def MakeBinomialPmf(n, p):
     return pmf
 
 
-def EvalGammaPdf(lam, a):
+def EvalGammaPdf(x, a):
     """Computes the Gamma PDF.
 
-    lam: where to evaluate the PDF
+    x: where to evaluate the PDF
     a: parameter of the gamma distribution
 
     returns: float probability
     """
-    return lam**(a-1) * math.exp(-lam) / gamma(a)
+    return x**(a-1) * np.exp(-x) / gamma(a)
 
 
-def MakeGammaPmf(lams, a):
+def MakeGammaPmf(xs, a):
     """Makes a PMF discrete approx to a Gamma distribution.
 
     lam: parameter lambda in events per unit time
@@ -1883,10 +1883,9 @@ def MakeGammaPmf(lams, a):
 
     returns: normalized Pmf
     """
-    pmf = Pmf()
-    for lam in lams:
-        pmf[lam] = EvalGammaPdf(lam, a)
-        
+    xs = np.asarray(xs)
+    ps = EvalGammaPdf(xs, a)
+    pmf = Pmf(dict(zip(xs, ps)))
     pmf.Normalize()
     return pmf
 
