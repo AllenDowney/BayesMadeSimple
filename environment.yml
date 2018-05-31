@@ -1,7 +1,6 @@
 name: BayesMadeSimple
 channels:
   - unidata
-  - vpython
   - defaults
 dependencies:
   - _ipyw_jlab_nb_ext_conf=0.1.0=py36he11e457_0
@@ -260,8 +259,6 @@ dependencies:
   - pint=0.7.2=py36_2
   - autobahn=17.10.1=py_0
   - txaio=2.8.2=py_0
-  - vpnotebook=0.1.3=py36_1
-  - vpython=7.3.2=py36_0
   - pip:
     - pygame==1.9.3
     - tables==3.4.2
