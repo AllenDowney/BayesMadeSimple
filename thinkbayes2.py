@@ -2018,6 +2018,7 @@ def MakeWeibullPmf(lam, k, high, n=200):
     """
     xs = np.linspace(0, high, n)
     ps = EvalWeibullPdf(xs, lam, k)
+    ps[np.isinf(ps)] = 0
     return Pmf(dict(zip(xs, ps)))
 
 
@@ -2840,7 +2841,8 @@ def ReadStataDct(dct_file, **options):
 
     returns: FixedWidthVariables object
     """
-    type_map = dict(byte=int, int=int, long=int, float=float, double=float)
+    type_map = dict(byte=int, int=int, long=int, float=float, 
+                    double=float, numeric=float)
 
     var_info = []
     with open(dct_file, **options) as f:
@@ -2915,9 +2917,9 @@ def ResampleRowsWeighted(df, column='finalwgt'):
 
     returns: DataFrame
     """
-    weights = df[column]
-    cdf = Cdf(dict(weights))
-    indices = cdf.Sample(len(weights))
+    weights = df[column].copy()
+    weights /= sum(weights)
+    indices = np.random.choice(df.index, len(df), replace=True, p=weights)
     sample = df.loc[indices]
     return sample
 
