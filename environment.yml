@@ -8,6 +8,10 @@ dependencies:
   - seaborn
   - pandas
   - scipy
+  - pip
+  - pip:
+    - empyrical-dist
+
 
 
 
