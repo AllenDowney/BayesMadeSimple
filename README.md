@@ -2,8 +2,10 @@
 
 Allen Downey
 
-The tutorial material is based on my book, [*Think Bayes*](http://greenteapress.com/wp/think-bayes/), 
-a class I teach at Olin College, and my blog, [“Probably Overthinking It.”](http://allendowney.com/blog)
+This tutorial is an introduction to Bayesian statistics using Python.  It starts from Bayes's Theorem and works up to Bayesian inference.
+
+It is based on my book, [*Think Bayes*](http://greenteapress.com/wp/think-bayes/), 
+a [class I teach at Olin College](https://sites.google.com/site/compbayes18/), and my blog, [“Probably Overthinking It.”](http://allendowney.com/blog)
 
 
 ### Installation instructions
