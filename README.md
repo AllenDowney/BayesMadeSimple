@@ -1,11 +1,15 @@
 ## Bayesian Statistics Made Simple
 
-Allen Downey
+[Allen Downey](https:allendowney.com)
 
-This tutorial is an introduction to Bayesian statistics using Python.  It starts from Bayes's Theorem and works up to Bayesian inference.
+Bayesian statistical methods are becoming more common, but there are not many resources to help beginners get started. People who know Python can use their programming skills to get a head start. 
+
+In this tutorial, I introduce Bayesian methods using grid algorithms, which help develop understanding and prepare for MCMC, which is a powerful algorithm for real-world problems.
 
 It is based on my book, [*Think Bayes*](http://greenteapress.com/wp/think-bayes/), 
 a [class I teach at Olin College](https://sites.google.com/site/compbayes18/), and my blog, [“Probably Overthinking It.”](http://allendowney.com/blog)
+
+[Slides for this tutorial are here](https://docs.google.com/presentation/d/e/2PACX-1vTUIf7LJJpUd4NzInBGRyHnHqoZ4E736sqd6Iwq_ne3_aDXdJlNgO8O57_USzQzFfDx0gA44fniKe5R/pub).
 
 
 ### Installation instructions
