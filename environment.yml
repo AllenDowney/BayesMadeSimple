@@ -10,7 +10,7 @@ dependencies:
   - scipy
   - pip
   - pip:
-    - empyrical-dist
+    - empiricaldist
 
 
 
