@@ -20,27 +20,29 @@ Numbered tasks for tracking work. Each task has a permanent number; add new task
 
 **1. Runs in a current environment**
 - [x] `environment.yml` rewritten (2026-10-19): Python 3.12, conda-forge, the five libraries plus Jupyter, pytest, nbmake; the old 2020 edits (pymc3, arviz for Zig Zag) dropped. Local env: `mamba env create -f environment.yml` (created as `BayesMadeSimple`: NumPy 2.5, pandas 3.0, SciPy 1.18, Matplotlib 3.11, Seaborn 0.13)
-- [ ] `requirements.txt` for pip/Colab users; confirm Colab's current Python
-- [ ] First code cell installs what Colab lacks (probably nothing for the three workshop notebooks)
-- [ ] Fix breakage and deprecation warnings
-- [ ] Replace Binder instructions with Colab
+- [x] `requirements.txt` (unpinned; Colab already has all five libraries) and `requirements-dev.txt` (adds Jupyter, pytest, nbmake). Colab is on Python 3.12 since 2025-08 (release notes)
+- [x] First code cell installs what Colab lacks: nothing to install, no data or helper files, so no install cell
+- [x] Breakage and deprecation warnings: none. All six notebooks (student versions too) run with Deprecation/Future/PendingDeprecation/User/Runtime warnings as errors (NumPy 2.5, pandas 3.0, SciPy 1.18, Matplotlib 3.11)
+- [x] README install section rewritten: Colab first, then pip or mamba; Binder and Anaconda/Python 3.7 instructions removed; notebook table with Colab links; which tag matches which video
 
 **2. Tests and CI**
-- [ ] `pytest --nbmake` on the three solution notebooks
-- [ ] GitHub Actions (push, PR, monthly), status badge
+- [x] `pytest --nbmake` on all six notebooks (the student versions run too; their blanks are placeholders)
+- [x] GitHub Actions `.github/workflows/tests.yml` (push to master, PR, monthly, manual; Python 3.12; pip; 20-minute timeout), badge in the README
 
 **3. Colab**
-- [ ] "Open in Colab" links in each notebook and the README
+- [x] "Click here to run this notebook on Colab" cell after the title of each notebook (solutions also link to the version with blanks), and in the README table
 - [ ] Allen runs one notebook on Colab end to end
 
 **4. Text**
-- [ ] Typos and broken links only; everything else under "Content issues"
+- [x] Typos: "20 vanilla of each" → "20 of each", "What's are", "Maximum Aposteori Probability" → "maximum a posteriori probability", "return" → "returns", "wining", "an end itself" → "an end in itself", a missing period; `credible_interval` docstring said "Compute the mean of a PMF"
+- [x] Links: README `https:allendowney.com` fixed, http → https (Green Tea Press, blog, MacKay), LessWrong wiki link updated to its new URL; everything else under "Content issues"
 
 **5. README in the standard shape**
 - [ ] Abstract, level, length, outline with Colab links, slides, recordings (with tags), license, links to *Think Bayes* and the hub
 
 **6. Site and visibility**
-- [ ] Pages site is the README (Jekyll); SEO checklist items that apply (description, title)
+- [ ] Add `jb/` (Jupyter Book 1) on Pages with the three solution notebooks, each page linking to the student version on Colab (Allen, 2026-10-19); replaces the Jekyll README page
+- [ ] Then the `plans/seo.md` checklist (descriptions, sitemap, landing title, page-view counter, `Sitemap:` line)
 - [ ] Hub entry, repo description and topics
 
 **7. Close**
@@ -82,4 +84,14 @@ No data files, no helper modules, no install cell, no Colab links. Kernel metada
 
 ### Content issues
 
-(For Allen to decide; none yet.)
+(For Allen to decide.)
+
+1. README: the link to the Olin class (`sites.google.com/site/compbayes18`) now goes to a Google sign-in page. Remove it, or point to something else?
+2. README: link *Think Bayes* to the 2nd edition site (`allendowney.github.io/ThinkBayes2/`) instead of the Green Tea Press page? (Step 5 adds a book link anyway.)
+3. `01_cookie`: "which is what we got by computing $P(D)$ directly" and "which is what we got using Bayes's Theorem explicitly" refer to a computation that isn't in the notebook (presumably on the slides).
+4. `02_euro`: the text says the prior runs "from 0 to 100" ("Here's a uniform prior from 0 to 100", "any value of $x$ from 0 to 100 is equally likely"), but the code uses 0 to 1 (`np.linspace(0, 1, 101)`).
+5. `02_euro`: "We have already seen one way to summarize a posterior distribution, the … MAP" — the MAP doesn't appear earlier in the notebooks.
+6. `02_euro`: "The following function takes a Pmf …" — the notebooks use pandas `Series` now (leftover from the `empiricaldist` version). Same docstrings say "pmf: Series representing a PMF", which is fine.
+7. Copyright lines say 2020; the license is MIT in the notebooks but there is no LICENSE file in the repo (step 5).
+8. The slides (Google Slides, 2019?) may not match the 2020 notebooks; check before the next time you give it.
+

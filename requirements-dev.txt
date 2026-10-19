@@ -1,0 +1,4 @@
+-r requirements.txt
+jupyter
+pytest
+nbmake

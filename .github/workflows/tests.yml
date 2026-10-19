@@ -1,0 +1,36 @@
+name: tests
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  schedule:
+    # monthly, to catch library drift
+    # min hour day-of-month month day-of-week
+    - cron: "0 0 1 * *"
+  workflow_dispatch:
+
+jobs:
+  tests:
+    name: Tests (Python 3.12)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # Colab's Python version
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-dev.txt
+
+      # The student versions run too: their blanks are placeholders.
+      - name: Run tests
+        run: |
+          pytest --nbmake 01_cookie_soln.ipynb 02_euro_soln.ipynb 03_bandit_soln.ipynb 01_cookie.ipynb 02_euro.ipynb 03_bandit.ipynb
