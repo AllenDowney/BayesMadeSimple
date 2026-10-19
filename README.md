@@ -1,5 +1,11 @@
 ## Bayesian Statistics Made Simple
 
+
+I presented this tutorial at PyCon US every year from 2012 to 2016 and at SciPy 2019. The most recent recording is [SciPy 2019](https://www.youtube.com/watch?v=-X0BiV9n_fQ); earlier ones are from PyCon [2016](https://www.youtube.com/watch?v=TpgiFIGXcT4), [2015](https://www.youtube.com/watch?v=5W715nfJNJw), [2014](https://www.youtube.com/watch?v=z_sIDLVisvA), [2013](https://www.youtube.com/watch?v=fH_as3eZ5YU), and [2012](https://www.youtube.com/watch?v=bobeo5kFz1g).
+
+This is one of [my workshops and tutorials](https://allendowney.github.io/#workshops).
+
+
 [Allen Downey](https:allendowney.com)
 
 Bayesian statistical methods are becoming more common, but there are not many resources to help beginners get started. People who know Python can use their programming skills to get a head start. 
