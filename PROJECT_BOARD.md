@@ -15,7 +15,7 @@ Numbered tasks for tracking work. Each task has a permanent number; add new task
 **0. Set up**
 - [x] `PROJECT_BOARD.md` and `CLAUDE.md` (2026-10-19)
 - [x] Tags (pushed 2026-10-19): `scipy-2019` at `bfce408` (2019-04-25, the last commit before the 2019-07-15 "Post workshop updates", which changed the `Pmf` API used in the video, e.g. `d6 + d6` → `d6.add_dist(d6)`); `pre-refresh-2026` at `39c99ac`; PyCon 2014–2016 tags (Decisions, below)
-- [ ] README: "The code in the SciPy 2019 video matches tag `scipy-2019`" (with step 5)
+- [x] README: each recording lists its tag
 - [x] Inventory (below)
 
 **1. Runs in a current environment**
@@ -38,7 +38,7 @@ Numbered tasks for tracking work. Each task has a permanent number; add new task
 - [x] Links: README `https:allendowney.com` fixed, http → https (Green Tea Press, blog, MacKay), LessWrong wiki link updated to its new URL; everything else under "Content issues"
 
 **5. README in the standard shape**
-- [ ] Abstract, level, length, outline with Colab links, slides, recordings (with tags), license, links to *Think Bayes* and the hub
+- [x] README rewritten (2026-10-19): abstract, level (beginner) and length (90 minutes, Allen), outline with Colab table, slides, recordings with the matching tag for each, running instructions, next steps (*Think Bayes* 2e, hub), license; `LICENSE` file (MIT, as the notebooks say)
 
 **6. Site and visibility**
 - [ ] Add `jb/` (Jupyter Book 1) on Pages with the three solution notebooks, each page linking to the student version on Colab (Allen, 2026-10-19); replaces the Jekyll README page
@@ -86,12 +86,10 @@ No data files, no helper modules, no install cell, no Colab links. Kernel metada
 
 (For Allen to decide.)
 
-1. README: the link to the Olin class (`sites.google.com/site/compbayes18`) now goes to a Google sign-in page. Remove it, or point to something else?
-2. README: link *Think Bayes* to the 2nd edition site (`allendowney.github.io/ThinkBayes2/`) instead of the Green Tea Press page? (Step 5 adds a book link anyway.)
-3. `01_cookie`: "which is what we got by computing $P(D)$ directly" and "which is what we got using Bayes's Theorem explicitly" refer to a computation that isn't in the notebook (presumably on the slides).
-4. `02_euro`: the text says the prior runs "from 0 to 100" ("Here's a uniform prior from 0 to 100", "any value of $x$ from 0 to 100 is equally likely"), but the code uses 0 to 1 (`np.linspace(0, 1, 101)`).
-5. `02_euro`: "We have already seen one way to summarize a posterior distribution, the … MAP" — the MAP doesn't appear earlier in the notebooks.
-6. `02_euro`: "The following function takes a Pmf …" — the notebooks use pandas `Series` now (leftover from the `empiricaldist` version). Same docstrings say "pmf: Series representing a PMF", which is fine.
-7. Copyright lines say 2020; the license is MIT in the notebooks but there is no LICENSE file in the repo (step 5).
-8. The slides (Google Slides, 2019?) may not match the 2020 notebooks; check before the next time you give it.
+Resolved 2026-10-19 (Allen): Olin class mention dropped from the README; *Think Bayes* links to the 2e site; the four notebook text fixes made (cookie: the two "what we got" sentences reworded; Euro: "0 to 100" → "0 to 1", "takes a Pmf" → "takes a `Series` that represents a PMF", "We have already seen … MAP" → "One way … is the MAP"); `LICENSE` added.
 
+Open:
+
+1. The slides (Google Slides, 2019?) may not match the 2020 notebooks; check before the next time you give it.
+2. Copyright lines in the notebooks say 2020.
+3. The October 2020 version's venue, if any.
