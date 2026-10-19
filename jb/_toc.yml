@@ -1,0 +1,6 @@
+format: jb-book
+root: index
+chapters:
+- file: 01_cookie
+- file: 02_euro
+- file: 03_bandit

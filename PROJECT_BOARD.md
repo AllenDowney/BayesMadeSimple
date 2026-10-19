@@ -41,8 +41,10 @@ Numbered tasks for tracking work. Each task has a permanent number; add new task
 - [x] README rewritten (2026-10-19): abstract, level (beginner) and length (90 minutes, Allen), outline with Colab table, slides, recordings with the matching tag for each, running instructions, next steps (*Think Bayes* 2e, hub), license; `LICENSE` file (MIT, as the notebooks say)
 
 **6. Site and visibility**
-- [ ] Add `jb/` (Jupyter Book 1) on Pages with the three solution notebooks, each page linking to the student version on Colab (Allen, 2026-10-19); replaces the Jekyll README page
-- [ ] Then the `plans/seo.md` checklist (descriptions, sitemap, landing title, page-view counter, `Sitemap:` line)
+- [x] `jb/` (Jupyter Book 1, 2026-10-19): `build.sh [publish]` runs `prep_notebooks.py` (copies the solution notebooks in without `_soln`, makes each one's first H2 its title, adds the page description) and `jb build` (executes the notebooks). The pages link to the versions with blanks on Colab. Build tools are in `environment.yml`
+- [x] SEO checklist in the test build: sitemap lists only the 4 pages; each page has one description, one `og:description`, `rel="canonical"`; landing H1 differs from the site title; page-view counter in `extra_footer`; social image is the *Think Bayes* 2e cover. No `jupytext.toml` (no `.md` pairs)
+- [ ] Allen reviews the four descriptions (`jb/index.md` front matter, `jb/prep_notebooks.py`)
+- [ ] Publish: `./build.sh publish`, switch Pages from `master` / (Jekyll) to `gh-pages`, delete the root `_config.yml`; `Sitemap:` line in `~/AllenDowney.github.io/robots.txt`; Allen submits the sitemap in Search Console; tick in GreenTeaPress Task 22
 - [ ] Hub entry, repo description and topics
 
 **7. Close**

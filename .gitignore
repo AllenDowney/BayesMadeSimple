@@ -1,2 +1,4 @@
 .ipynb_checkpoints/
 __pycache__/
+jb/_build/
+jb/0*.ipynb

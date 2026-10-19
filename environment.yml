@@ -12,3 +12,8 @@ dependencies:
   # for testing
   - pytest
   - nbmake
+  # for building the site (jb/build.sh)
+  - jupyter-book<2
+  - sphinx-sitemap
+  - sphinxext-opengraph
+  - ghp-import
