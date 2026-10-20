@@ -365,8 +365,6 @@
   <section class="tex2jax_ignore mathjax_ignore" id="the-bayesian-bandit-problem">
 <h1>The Bayesian bandit problem<a class="headerlink" href="#the-bayesian-bandit-problem" title="Link to this heading">#</a></h1>
 <p>Code and exercises from my workshop on Bayesian statistics in Python.</p>
-<p>Copyright 2020 Allen Downey</p>
-<p>MIT License: https://opensource.org/licenses/MIT</p>
 <p><a class="reference external" href="https://colab.research.google.com/github/AllenDowney/BayesMadeSimple/blob/master/03_bandit_soln.ipynb">Click here to run this notebook on Colab</a>. For the exercises, use <a class="reference external" href="https://colab.research.google.com/github/AllenDowney/BayesMadeSimple/blob/master/03_bandit.ipynb">the version with blanks</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -529,7 +527,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>L W W W L L W L L L W W W L L L L L W L 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>L L L W L L W L L L L L L L L L L L L W 
 </pre></div>
 </div>
 </div>
@@ -607,7 +605,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/173376b0feb9deb624dcdfeba87f3653d0194197a760d99a03ab586d771a90b5.png" src="_images/173376b0feb9deb624dcdfeba87f3653d0194197a760d99a03ab586d771a90b5.png" />
+<img alt="_images/b481a2173751ccc0649b7b5c60323369ab273123c16b230ded7873cbe3f86397.png" src="_images/b481a2173751ccc0649b7b5c60323369ab273123c16b230ded7873cbe3f86397.png" />
 </div>
 </div>
 <p>After playing each machine 10 times, we can summarize <code class="docutils literal notranslate"><span class="pre">machines</span></code> by printing the posterior mean and credible interval:</p>
@@ -663,10 +661,10 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.16681944698849055 [0.02859509 0.35941186]
-0.16681944698849055 [0.02859509 0.35941186]
-0.6666667032600212 [0.43063791 0.85987457]
-0.41666666663460256 [0.19447309 0.64527985]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.1668194469884906 [0.02859509 0.35941186]
+0.1668194469884906 [0.02859509 0.35941186]
+0.16681944698849058 [0.02859509 0.35941186]
+0.41666666663460267 [0.19447309 0.64527985]
 </pre></div>
 </div>
 </div>
@@ -715,7 +713,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.int64(2)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.int64(3)
 </pre></div>
 </div>
 </div>
@@ -755,7 +753,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2 W 0.6923077429464295
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3 L 0.38461538455742045
 </pre></div>
 </div>
 </div>
@@ -785,7 +783,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/162c776287c5f85c24b8c961174f99630bfa56e776307714c354dd862c916fad.png" src="_images/162c776287c5f85c24b8c961174f99630bfa56e776307714c354dd862c916fad.png" />
+<img alt="_images/25cfe9a19a8912a3626be7493b1e5306912ed751faa9c2d06d2d0d6fd014cbed.png" src="_images/25cfe9a19a8912a3626be7493b1e5306912ed751faa9c2d06d2d0d6fd014cbed.png" />
 </div>
 </div>
 <p>We can summarize <code class="docutils literal notranslate"><span class="pre">machines</span></code> by printing the posterior mean and credible interval:</p>
@@ -797,10 +795,10 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.11788232939529279 [0.0180305  0.25907531]
-0.0955671624054417 [0.        0.2746598]
-0.24285714285714274 [0.15839587 0.32588037]
-0.08643901367695142 [0.         0.25014556]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.30303030303031664 [0.17519305 0.43460073]
+0.25000000058806265 [0.11502874 0.39891217]
+0.29166666667068186 [0.14736865 0.44609924]
+0.5925925925925926 [0.43067799 0.73670501]
 </pre></div>
 </div>
 </div>
@@ -816,10 +814,10 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 15
-1 8
-2 68
-3 9
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 31
+1 22
+2 22
+3 25
 </pre></div>
 </div>
 </div>
@@ -829,6 +827,8 @@
 <p>Go back and run this section again with a different value of <code class="docutils literal notranslate"><span class="pre">num_play</span></code> and see how it does.</p>
 <p>The algorithm I presented in this notebook is called <a class="reference external" href="https://en.wikipedia.org/wiki/Thompson_sampling">Thompson sampling</a>.  It is an example of a general strategy called <a class="reference external" href="https://www.lesswrong.com/w/bayesian-decision-theory">Bayesian decision theory</a>, which is the idea of using a posterior distribution as part of a decision-making process, usually by choosing an action that minimizes the costs we expect on average (or maximizes the benefits).</p>
 <p>In my opinion, strategies like this are the biggest advantage of Bayesian methods over classical statistics.  When we represent knowledge in the form of probability distributions, Bayes’s theorem tells us how to change our beliefs as we get more data, and Bayesian decision theory tells us how to use those beliefs to make better decisions.</p>
+<p>Copyright 2020–2026 Allen Downey</p>
+<p><a class="reference external" href="https://opensource.org/license/MIT">MIT License</a></p>
 </section>
 </section>
 </section>
