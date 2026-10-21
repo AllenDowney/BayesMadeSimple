@@ -12,7 +12,7 @@ on:
 
 jobs:
   tests:
-    name: Tests (Python 3.12)
+    name: Tests (Python 3.13)
     runs-on: ubuntu-latest
     timeout-minutes: 20
 
@@ -20,10 +20,10 @@ jobs:
       - uses: actions/checkout@v5
 
       # Colab's Python version
-      - name: Set up Python 3.12
+      - name: Set up Python 3.13
         uses: actions/setup-python@v6
         with:
-          python-version: "3.12"
+          python-version: "3.13"
 
       - name: Install dependencies
         run: |
