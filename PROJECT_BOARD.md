@@ -8,7 +8,7 @@ Numbered tasks for tracking work. Each task has a permanent number; add new task
 
 ## Task 1: Refresh
 
-**Status:** In progress (2026-10-19)
+**Status:** DONE (2026-10-21)
 
 **Context:** BayesMadeSimple is a "current" workshop (GreenTeaPress Task 24) and the pilot for the refresh checklist in `~/GreenTeaPress/plans/workshops.md` ("Refresh checklist"). That checklist is the guide; revise it after this pilot. 358 stars; last content change 2020-10-23. The most recent recording is [SciPy 2019](https://www.youtube.com/watch?v=-X0BiV9n_fQ).
 
@@ -31,7 +31,7 @@ Numbered tasks for tracking work. Each task has a permanent number; add new task
 
 **3. Colab**
 - [x] "Click here to run this notebook on Colab" cell after the title of each notebook (solutions also link to the version with blanks), and in the README table
-- [ ] Allen runs one notebook on Colab end to end
+- [x] Allen runs one notebook on Colab end to end (`03_bandit_soln`, passed 2026-10-21)
 
 **4. Text**
 - [x] Typos: "20 vanilla of each" → "20 of each", "What's are", "Maximum Aposteori Probability" → "maximum a posteriori probability", "return" → "returns", "wining", "an end itself" → "an end in itself", a missing period; `credible_interval` docstring said "Compute the mean of a PMF"
@@ -48,7 +48,7 @@ Numbered tasks for tracking work. Each task has a permanent number; add new task
 - [ ] Hub entry, repo description and topics
 
 **7. Close**
-- [ ] Tag `2026-refresh`; note in GreenTeaPress Task 24
+- [x] Tag `2026-refresh`; note in GreenTeaPress Task 24 (2026-10-21)
 
 ### Inventory (2026-10-19)
 
@@ -95,3 +95,4 @@ Open:
 1. The slides (Google Slides, 2019?) may not match the 2020 notebooks; check before the next time you give it.
 2. Copyright lines in the notebooks say 2020.
 3. The October 2020 version's venue, if any.
+4. Open (Allen, 2026-10-20, new rule for all tutorials and workshops): code under MIT, text under Creative Commons (which CC license?). The notebooks and README now say MIT only; update them, along with the new notebook layout (copyright and license at the end). **Resolved 2026-10-21:** text CC BY-NC-SA 4.0, as in CompStats; closing cell of the six notebooks and the README updated (the layout was already done).

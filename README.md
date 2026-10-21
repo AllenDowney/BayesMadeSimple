@@ -74,4 +74,4 @@ To go further, read [*Think Bayes*](https://allendowney.github.io/ThinkBayes2/),
 
 ## License
 
-The code and notebooks are available under the [MIT License](LICENSE).
+The code is available under the [MIT License](LICENSE). The text is available under the [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-nc-sa/4.0/).
